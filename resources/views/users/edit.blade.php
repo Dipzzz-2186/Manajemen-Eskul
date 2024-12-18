@@ -51,6 +51,7 @@
                             <option value="user">User</option>
                             <option value="pelatih">Pelatih</option>
                             <option value="admin">Admin</option>
+                            <option value="pembina">pembina</option>
                         </select>
                         <x-input-error class="mt-2" :messages="$errors->get('Role')" />
                     </div>

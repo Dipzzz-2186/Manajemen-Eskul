@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class UserEditRequest extends FormRequest
+class ValidasiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +21,9 @@ class UserEditRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => ['sometimes', 'string'],
-            'email' => ['sometimes', 'string', 'email', 'unique:users,email,' . $this->id],
-            'password' => ['nullable', 'string', Password::default()],
-            'role' => ['sometimes', 'string', 'in:admin,pelatih,pembina,user'],
-        ];
+    return [
+            'materi' => 'nullable|string',
+            'status_validasi' => 'required|in:pending,diterima,ditolak,approved|string|max:255',
+    ];
     }
 }

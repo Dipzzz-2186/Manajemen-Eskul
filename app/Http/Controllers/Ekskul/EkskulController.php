@@ -21,6 +21,7 @@ class EkskulController extends Controller
     public function index()
     {
         $ekskuls = Ekskul::orderBy('created_at', 'desc')->get();
+        
 
         return view('ekskul.index', compact('ekskuls'));
     }

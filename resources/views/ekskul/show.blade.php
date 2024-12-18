@@ -39,7 +39,6 @@
                                   <a href="{{ route('dashboard') }}" class="inline-block bg-gradient-to-r from-gray-700 to-gray-900 text-white font-bold py-3 px-6 rounded-lg transition-transform duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-300 focus:ring-opacity-50">
                                         Home
                                     </a>
-
                             </div>
                         </div>
 
@@ -53,14 +52,16 @@
                                         <th class="py-3 px-6 text-sm font-medium text-center">No</th>
                                         <th class="py-3 px-6 text-sm font-medium text-center">Nama Anggota</th>
                                         <th class="py-3 px-6 text-sm font-medium text-center">Kelas</th>
+                                        <th class="py-3 px-6 text-sm font-medium text-center">Nomor Anggota</th> <!-- Ganti ID dengan Nomor -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($members as $member)
                                         <tr class="border-b hover:bg-gray-50">
-                                            <td class="py-4 px-6 text-sm text-center text-gray-700">{{ $member->id }}</td>
+                                            <td class="py-4 px-6 text-sm text-center text-gray-700">{{ $loop->iteration }}</td>
                                             <td class="py-4 px-6 text-sm text-center text-gray-700">{{ $member->nama }}</td>
                                             <td class="py-4 px-6 text-sm text-center text-gray-700">{{ $member->kelas }}</td>
+                                            <td class="py-4 px-6 text-sm text-center text-gray-700">{{ $member->nomor_anggota ?? 'N/A' }}</td> <!-- Menampilkan Nomor Anggota -->
                                         </tr>
                                     @endforeach
                                 </tbody>

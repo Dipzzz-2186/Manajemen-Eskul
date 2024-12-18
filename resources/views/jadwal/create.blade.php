@@ -60,8 +60,20 @@
                             <option value="selesai">Selesai</option>
                         </select>
                     </div>
+
+                    <!-- Checkbox untuk Panggil Pelatih -->
+                    <div class="mt-4">
+                        <label for="panggil_pelatih" class="inline-flex items-center">
+                            <input type="checkbox" name="panggil_pelatih" id="panggil_pelatih" value="1" class="form-checkbox text-indigo-600">
+                            <span class="ml-2 text-gray-700">Panggil Pelatih</span>
+                        </label>
+                        <p class="mt-1 text-sm text-gray-600">
+                            Centang jika memerlukan materi dari pelatih.
+                        </p>
+                    </div>
+
                     <div class="flex items-center gap-4">
-                    <x-primary-button>{{ __('Save') }}</x-primary-button>
+                        <x-primary-button>{{ __('Save') }}</x-primary-button>
                     </div>
                 </form>
             </div>

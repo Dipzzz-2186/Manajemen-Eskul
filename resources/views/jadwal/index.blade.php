@@ -18,7 +18,7 @@
             @endif
 
             <!-- Add Schedule Button (only for pelatih) with hover scale animation -->
-            @if(Auth::user()->role == 'pelatih')
+            @if(Auth::user()->role == 'pembina')
             <div class="mb-8 text-center animate__animated animate__fadeInUp">
                 <a href="{{ route('jadwal.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all duration-300 ease-in-out hover:scale-110">
                     Tambah Jadwal
@@ -37,9 +37,13 @@
                             <th class="px-6 py-4 text-sm font-medium">Hari</th>
                             <th class="px-6 py-4 text-sm font-medium">Mulai</th>
                             <th class="px-6 py-4 text-sm font-medium">Selesai</th>
-                            @if (Auth::user()->role == 'pelatih')
+                            @if(Auth::user()->role !== 'user')
+                            <th class="px-6 py-4 text-sm font-medium">Status Validasi</th>
+                            @endif
+                            @if(Auth::user()->role == 'pelatih' || Auth::user()->role == 'pembina')
                             <th class="px-6 py-4 text-sm font-medium">Actions</th>
                             @endif
+
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +60,30 @@
                             <td class="px-6 py-4 text-sm">{{ \Carbon\Carbon::parse($jadwal->mulai)->format('h:i A') }}</td>
                             <td class="px-6 py-4 text-sm">{{ \Carbon\Carbon::parse($jadwal->selesai)->format('h:i A') }}</td>
 
-                            @if (Auth::user()->role == 'pelatih')
+                            @if(Auth::user()->role !== 'user')
+                            <td class="px-6 py-4 text-sm">
+                                <span class="inline-flex items-center rounded-full bg-indigo-200 px-3 py-1 text-xs font-medium text-indigo-800 ring-1 ring-inset ring-indigo-800/10">
+                                    {{ $jadwal->status_validasi }}
+                                </span> 
+                            </td>
+                            @endif
+
+                            <!-- Validasi untuk pelatih -->
+        @if(Auth::user()->role == 'pelatih')
+        <td class="px-6 py-4 flex space-x-4">
+            @if($jadwal->status_validasi !== 'sudah divalidasi')
+                <a href="{{ route('jadwal.validasi', $jadwal->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all duration-300 transform hover:scale-110">
+                    Validasi
+                </a>
+            @else
+                <span class="text-green-600 font-semibold">
+                    Sudah Divalidasi
+                </span>
+            @endif
+        </td>
+        @endif
+
+                            @if (Auth::user()->role == 'pembina')
                             <td class="px-6 py-4 flex space-x-4">
                                 <!-- Edit Button with smooth hover animation -->
                                 <a href="{{ route('jadwal.edit', $jadwal->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all duration-300 transform hover:scale-110">
@@ -70,8 +97,15 @@
                                         Delete
                                     </button>
                                 </form>
-                            </td>
+                                @endif
+                                @if(Auth::user()->role == 'user')
+                            <td class="px-6 py-4 flex space-x-4">
+                                <a href="{{ route('absensi.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all duration-300 transform hover:scale-110">
+                                    Absensi 
+                                </a>
                             @endif
+                            </td>
+                            
                         </tr>
                         @endforeach
                     </tbody>

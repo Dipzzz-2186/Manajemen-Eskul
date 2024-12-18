@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AbsensiExport;
+use App\Http\Requests\AbsensiRequest;
 use App\Models\Absensi;
 use App\Models\Ekskul\Ekskul;
+use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class AbsensiController extends Controller
 {
@@ -12,8 +17,10 @@ class AbsensiController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        $ekskuls = Ekskul::all();
+
+        return view('absensi.index', compact('ekskuls'));
     }
 
     /**
@@ -21,15 +28,19 @@ class AbsensiController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AbsensiRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        Absensi::create($data);
+
+        return redirect()->route('jadwal.index')->with('success', 'Berhasil Melakukan Absensi!');
     }
 
     /**
@@ -65,5 +76,12 @@ class AbsensiController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function export($ekskul)
+    {
+        $ekskulName = Ekskul::findOrFail($ekskul)->name; // Ambil nama ekskul dari ID ekskul
+
+        return Excel::download(new AbsensiExport($ekskulName), $ekskulName . '_absensi.xlsx');
     }
 }

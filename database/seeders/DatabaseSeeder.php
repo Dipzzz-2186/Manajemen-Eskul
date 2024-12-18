@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'nis' => null, // Admin tidak memerlukan NIS
         ]);
-    }
+        
+    }   
 }

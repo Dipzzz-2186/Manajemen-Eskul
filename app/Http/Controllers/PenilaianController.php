@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PenilaianExport;
 use App\Http\Requests\PenilaianRequest;
 use App\Models\Ekskul\Ekskul;
 use App\Models\Pendaftaran;
 use App\Models\Penilaian;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PenilaianController extends Controller
 {
@@ -42,7 +44,7 @@ class PenilaianController extends Controller
 
         Penilaian::create($data);
 
-        return redirect()->route('penilaian.index')->with('success', 'Berhasil Menambah Penilaian!');
+        return redirect()->route('dashboard')->with('success', 'Berhasil Menambah Penilaian!');
     }
 
     /**

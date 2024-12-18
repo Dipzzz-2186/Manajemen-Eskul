@@ -26,7 +26,7 @@ class UserCreateRequest extends FormRequest
             'name' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'unique:users,email'],
             'password' => ['required', 'string', Password::default()],
-            'role' => ['required', 'string', 'in:admin,pelatih,user'],
+            'role' => ['required', 'string', 'in:admin,pelatih,pembina,user'],
         ];
     }
 }

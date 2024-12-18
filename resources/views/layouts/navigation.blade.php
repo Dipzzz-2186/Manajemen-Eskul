@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex items-center space-x-8">
                     <div class="text-center">
-                        <img src="{{ asset('/images/logo2.png') }}" alt="Logo" class="h-16 w-auto rounded-lg shadow-md" />
+                        <img src="{{ asset('/images/logo.png') }}" alt="Logo" class="h-12 w-auto rounded-lg shadow-md" />
                     </div>
 
                     <!-- Navigation Links -->
@@ -18,7 +18,7 @@
                             {{ __('Jadwal') }}
                         </x-nav-link>
                         
-                        @if(Auth::user()->role == 'admin')
+                        @if(auth()->user()->role == 'pembina' || auth()->user()->role == 'admin')
                             <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')" class="text-white hover:text-gray-300 transition duration-300 ease-in-out font-semibold">
                                 {{ __('Users') }}
                             </x-nav-link>
@@ -36,7 +36,7 @@
                             </x-nav-link>
                         @endif
 
-                        @if(Auth::user()->role == 'pelatih')
+                        @if(Auth::user()->role == 'pelatih' || Auth::user()->role == 'admin')
                             <x-nav-link :href="route('pendaftaran.show')" :active="request()->routeIs('pendaftaran.show')" class="text-white hover:text-gray-300 transition duration-300 ease-in-out font-semibold">
                                 {{ __('Daftar Peserta Ekskul') }}
                             </x-nav-link>

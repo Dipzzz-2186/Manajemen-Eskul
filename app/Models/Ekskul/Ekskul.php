@@ -15,4 +15,10 @@ class Ekskul extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description', 'featured_image'];
+    
+    
+
+    
 }
+
+

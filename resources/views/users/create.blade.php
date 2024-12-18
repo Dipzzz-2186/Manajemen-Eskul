@@ -51,9 +51,13 @@
                             class="mt-1 block w-full border-gray-300 focus:border-indigo-500 
                              focus:ring-indigo-500 rounded-md shadow-sm">
                             <option value="" disabled selected>Select Role</option>
+                            @if(Auth::user()->role == 'admin')
                             <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                             <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="admin" {{ old('role') == 'pelatih' ? 'selected' : '' }}>pelatih</option>
+                            <option value="pembina" {{ old('role') == 'pembina' ? 'selected' : '' }}>pembina</option>
+                            @endif
+                            <option value="pelatih" {{ old('role') == 'pelatih' ? 'selected' : '' }}>pelatih</option>
+                           
                         </select>
                         <x-input-error class="mt-2" :messages="$errors->get('role')" />
                     </div>
